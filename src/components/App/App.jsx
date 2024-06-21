@@ -5,12 +5,12 @@ import Notification from '../Notification/Notification';
 import { useEffect, useState } from 'react';
 
 export default function App() {
+  const initialOptionState = {
+    good: 0,
+    neutral: 0,
+    bad: 0,
+  };
   const getInitialOptionsState = () => {
-    const initialOptionState = {
-      good: 0,
-      neutral: 0,
-      bad: 0,
-    };
     const savedOptions = localStorage.getItem('votedFeedback');
     if (savedOptions) {
       return Object.values(JSON.parse(savedOptions)).reduce(
@@ -31,7 +31,7 @@ export default function App() {
   };
 
   const resetFeedback = () => {
-    localStorage.removeItem('votedFeedback');
+    setOption(initialOptionState);
   };
 
   const totalFeedback = Object.values(option).reduce(
